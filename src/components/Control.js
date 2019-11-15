@@ -5,7 +5,11 @@ export default function Control() {
   const [search, setSearch] = useState('');
 
   const handleShow = () => {
-    setShowForm(!showForm);
+    if (showForm) {
+      /* todo redirect with data */
+    } else {
+      setShowForm(!showForm);
+    }
   };
 
   const handleChange = ({ target }) => {
