@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+import Hits from './Hits';
+import Catalog from './Catalog';
 
 export default function MainPage() {
   return (
-    <p>MainPage</p>
+    <Fragment>
+      <Hits />
+      <Catalog />
+    </Fragment>
   );
 }
