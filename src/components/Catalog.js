@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { itemsRequest } from '../actions/actionCreators';
 
-import Categories from './Categories'
+import Categories from './Categories';
 import Preloader from './Preloader';
 import ItemSmallCard from './ItemSmallCard';
 
@@ -19,7 +19,7 @@ export default function Catalog() {
   return (
     <section className="catalog">
       <h2 className="text-center">Каталог</h2>
-      <Categories/>
+      <Categories />
       {loading && <Preloader />}
       {error && <p>Something went wrong</p>}
       <div className="row">

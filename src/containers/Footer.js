@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 
 import Menu from '../components/Menu';
@@ -25,12 +26,8 @@ export default function Footer() {
             </div>
           </section>
           <section>
-            <div className="footer-copyright">
-2009-2019 © BosaNoga.ru — модный интернет-магазин обуви и аксессуаров.
-                      Все права защищены.
-              <br />
-Доставка по всей России!
-            </div>
+              <div class="footer-copyright">2009-2019 © BosaNoga.ru — модный интернет-магазин обуви и аксессуаров.
+                  Все права защищены.<br/>Доставка по всей России!</div>
           </section>
         </div>
         <div className="col text-right">

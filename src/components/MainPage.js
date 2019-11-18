@@ -5,9 +5,9 @@ import Catalog from './Catalog';
 
 export default function MainPage() {
   return (
-    <Fragment>
+    <>
       <Hits />
       <Catalog />
-    </Fragment>
+    </>
   );
 }
