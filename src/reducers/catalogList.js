@@ -6,6 +6,7 @@ import {
   SEARCH_FAILTURE,
   SEARCH_SUCCESS,
   CHANGE_SEARCH_FIELD,
+  CATEGORIES_CHANGE,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
 };
 
 export default function catalogListReducer(state = initialState, action) {
+  console.log('catalog list reducer',state);
   switch (action.type) {
     case SEARCH_REQUEST:
     case ITEMS_REQUEST:
@@ -35,10 +37,10 @@ export default function catalogListReducer(state = initialState, action) {
       };
     case SEARCH_SUCCESS:
     case ITEMS_SUCCESS:
-      const { list } = action.payload;
+      const newItems = action.payload.list;
       return {
         ...state,
-        list,
+        list: state.list.concat(newItems),
         loading: false,
         error: null,
       };
@@ -49,6 +51,11 @@ export default function catalogListReducer(state = initialState, action) {
         search,
       };
     }
+    case CATEGORIES_CHANGE: 
+      return {
+        ...state,
+        list: [],
+      }
     default:
       return state;
   }

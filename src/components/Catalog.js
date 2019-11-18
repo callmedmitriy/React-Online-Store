@@ -20,7 +20,14 @@ export default function Catalog(props) {
     dispatch(itemsRequest(list.length, activeCategory, search));
   }, [dispatch]);
 
+  const handlerChangeCategory = id => {
+    console.log('change filter to',id)
+    dispatch(itemsRequest(0, id, search));
+  }
 
+  const handlerMore = () => {
+    dispatch(itemsRequest(list.length, activeCategory, search));
+  }
 
   return (
     <section className="catalog">
@@ -31,11 +38,13 @@ export default function Catalog(props) {
       {error && <p>Something went wrong</p>}
 
       {!mainPage && <Search />}
-      <Categories />
+      <Categories change={handlerChangeCategory}/>
       <div className="row">
         {list && list.map((card) => <ItemSmallCard {...card} key={card.id} />)}
       </div>
-      <More />
+      <div className="text-center">
+        <button className="btn btn-outline-primary" onClick={handlerMore}>Загрузить ещё</button>
+      </div>
     </section>
   );
 }

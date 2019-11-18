@@ -7,6 +7,7 @@ import App from './App';
 import store from './store';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css'
 import './index.css';
 
 import * as serviceWorker from './serviceWorker';

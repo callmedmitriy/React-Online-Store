@@ -40,7 +40,7 @@ export const searchHitsEpic = (action$) => action$.pipe(
 
 export const searchCategoriesEpic = (action$) => action$.pipe(
   ofType(CATEGORIES_REQUEST),
-  tap((o) => console.log('categories', o)),
+  tap((o) => console.log('categories epic', o)),
   switchMap((o) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/categories`).pipe(
     retry(3),
     map((o) => categoriesSuccess(o)),
@@ -49,8 +49,8 @@ export const searchCategoriesEpic = (action$) => action$.pipe(
 );
 
 export const searchItemsEpic = (action$) => action$.pipe(
-  ofType(ITEMS_REQUEST, CATEGORIES_CHANGE),
-  tap((o) => console.log('test',o)),
+  ofType(ITEMS_REQUEST),
+  tap((o) => console.log('search items epic',o)),
   map((o) => new URLSearchParams({
     q: o.payload.search, 
     categoryId: o.payload.categoryId, 
