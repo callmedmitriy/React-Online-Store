@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { categoriesRequest } from '../actions/actionCreators';
+import { categoriesRequest, categoriesChange } from '../actions/actionCreators';
 
 import Preloader from './Preloader';
 
@@ -13,8 +13,8 @@ export default function Categories() {
     dispatch(categoriesRequest());
   }, [dispatch]);
 
-  const handleFilter = ({ target }) => {
-    console.log(target.value);
+  const handleFilter = id => {
+    dispatch(categoriesChange(id));
   };
 
   if (loading) return <Preloader />;
@@ -27,11 +27,11 @@ export default function Categories() {
   return (
     <ul className="catalog-categories nav justify-content-center">
       <li className="nav-item">
-        <a className="nav-link active" href="#">Все</a>
+        <a className="nav-link active" onClick={() => handleFilter(0)}>Все</a>
       </li>
       {list && list.map((item) => (
         <li className="nav-item" key={item.id}>
-          <a className="nav-link" href="#" onClick={handleFilter}>{item.title}</a>
+          <a className="nav-link" onClick={() => handleFilter(item.id)}>{item.title}</a>
         </li>
       ))}
     </ul>

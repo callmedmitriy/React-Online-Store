@@ -2,12 +2,14 @@ import {
   CATEGORIES_REQUEST,
   CATEGORIES_FAILTURE,
   CATEGORIES_SUCCESS,
+  CATEGORIES_CHANGE,
 } from '../actions/actionTypes';
 
 const initialState = {
   list: [],
   loading: false,
   error: null,
+  active: 0,
 };
 
 export default function categoriesListReducer(state = initialState, action) {
@@ -33,6 +35,12 @@ export default function categoriesListReducer(state = initialState, action) {
         loading: false,
         error: null,
       };
+    case CATEGORIES_CHANGE:
+      const { id } = action.payload;
+      return {
+        ...state,
+        active: id,
+      }
     default:
       return state;
   }

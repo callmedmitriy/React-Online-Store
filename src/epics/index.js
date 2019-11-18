@@ -1,8 +1,6 @@
 import { ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
-import {
-  map, tap, retry, filter, debounceTime, switchMap, catchError,
-} from 'rxjs/operators';
+import { map, tap, retry, filter, debounceTime, switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import {
   HITS_LIST_REQUEST,
@@ -10,12 +8,16 @@ import {
   ITEMS_REQUEST,
   SEARCH_REQUEST,
   CHANGE_SEARCH_FIELD,
+  CATEGORIES_CHANGE,
 } from '../actions/actionTypes';
 import {
   hitsListSuccess,
   hitsListFailture,
   categoriesSuccess,
   categoriesFailture,
+  itemsRequest,
+  itemsSuccess,
+  itemsFailture,
 } from '../actions/actionCreators';
 
 export const changeSearchEpic = (action$) => action$.pipe(
@@ -23,7 +25,7 @@ export const changeSearchEpic = (action$) => action$.pipe(
   map((o) => o.payload.search.trim()),
   filter((o) => o !== ''),
   debounceTime(500),
-  map((o) => searchItemsEpic(o)),
+  map((o) => itemsRequest(o)),
 );
 
 export const searchHitsEpic = (action$) => action$.pipe(
@@ -35,6 +37,7 @@ export const searchHitsEpic = (action$) => action$.pipe(
     catchError((e) => of(hitsListFailture(e))),
   )),
 );
+
 export const searchCategoriesEpic = (action$) => action$.pipe(
   ofType(CATEGORIES_REQUEST),
   tap((o) => console.log('categories', o)),
@@ -45,17 +48,17 @@ export const searchCategoriesEpic = (action$) => action$.pipe(
   )),
 );
 
-/*
-  Продумать как добавить offset, category и search query
-*/
 export const searchItemsEpic = (action$) => action$.pipe(
-  ofType(ITEMS_REQUEST),
-  map((o) => o.payload.search),
-  map((o) => new URLSearchParams({ q: o })),
-  tap((o) => console.log(o)),
-  /* switchMap(o => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/items/?${o}`).pipe(
+  ofType(ITEMS_REQUEST, CATEGORIES_CHANGE),
+  tap((o) => console.log('test',o)),
+  map((o) => new URLSearchParams({
+    q: o.payload.search, 
+    categoryId: o.payload.categoryId, 
+    offset: o.payload.offset
+  })),
+  switchMap(o => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/items/?${o}`).pipe(
     retry(3),
     map(o => itemsSuccess(o)),
     catchError(e => of(itemsFailture(e))),
-  )), */
+  )), 
 );

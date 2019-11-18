@@ -5,6 +5,7 @@ import {
   CATEGORIES_REQUEST,
   CATEGORIES_FAILTURE,
   CATEGORIES_SUCCESS,
+  CATEGORIES_CHANGE,
   ITEMS_REQUEST,
   ITEMS_FAILTURE,
   ITEMS_SUCCESS,
@@ -48,11 +49,22 @@ export const categoriesSuccess = (list) => ({
   payload: { list },
 });
 
+export const categoriesChange = (id) => ({
+  type: CATEGORIES_CHANGE,
+  payload: { id },
+})
+
+
 /*
     Получение списка товаров
 */
-export const itemsRequest = () => ({
+export const itemsRequest = (offset = 0, categoryId = 0, search = '') => ({
   type: ITEMS_REQUEST,
+  payload: {
+    offset,
+    categoryId,
+    search,
+  }
 });
 
 export const itemsFailture = (error) => ({
