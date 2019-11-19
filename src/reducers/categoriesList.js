@@ -40,7 +40,7 @@ export default function categoriesListReducer(state = initialState, action) {
       return {
         ...state,
         active: id,
-      }
+      };
     default:
       return state;
   }

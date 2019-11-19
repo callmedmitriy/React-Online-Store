@@ -8,7 +8,6 @@ import categoriesListReducer from '../reducers/categoriesList.js';
 import hitsListReducer from '../reducers/hitsList.js';
 
 import {
-  changeSearchEpic,
   searchHitsEpic,
   searchCategoriesEpic,
   searchItemsEpic,
@@ -23,7 +22,6 @@ const reducer = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const epic = combineEpics(
-  changeSearchEpic,
   searchHitsEpic,
   searchCategoriesEpic,
   searchItemsEpic,

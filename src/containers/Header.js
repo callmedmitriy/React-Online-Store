@@ -1,8 +1,12 @@
 import React from 'react';
 
+import { withRouter } from 'react-router-dom';
+
 import Logo from '../components/Logo';
 import Menu from '../components/Menu';
 import Control from '../components/Control';
+
+const ControlWithPath = withRouter((props) => <Control {...props} />);
 
 export default function Header() {
   return (
@@ -13,7 +17,7 @@ export default function Header() {
             <Logo />
             <div className="collapase navbar-collapse" id="navbarMain">
               <Menu />
-              <Control />
+              <ControlWithPath />
             </div>
           </nav>
         </div>

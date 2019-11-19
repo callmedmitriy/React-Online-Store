@@ -6,7 +6,7 @@ import { hitsListRequest } from '../actions/actionCreators';
 import Preloader from './Preloader';
 import ItemSmallCard from './ItemSmallCard';
 
-export default function Hits(props) {
+export default function Hits() {
   const { list, loading, error } = useSelector((state) => state.hits);
   const dispatch = useDispatch();
 

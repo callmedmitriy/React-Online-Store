@@ -9,10 +9,8 @@ import {
   ITEMS_REQUEST,
   ITEMS_FAILTURE,
   ITEMS_SUCCESS,
-  SEARCH_REQUEST,
-  SEARCH_FAILTURE,
-  SEARCH_SUCCESS,
   CHANGE_SEARCH_FIELD,
+  CLEAR_LIST,
 } from './actionTypes';
 
 /*
@@ -52,7 +50,7 @@ export const categoriesSuccess = (list) => ({
 export const categoriesChange = (id) => ({
   type: CATEGORIES_CHANGE,
   payload: { id },
-})
+});
 
 
 /*
@@ -64,7 +62,7 @@ export const itemsRequest = (offset = 0, categoryId = 0, search = '') => ({
     offset,
     categoryId,
     search,
-  }
+  },
 });
 
 export const itemsFailture = (error) => ({
@@ -79,26 +77,14 @@ export const itemsSuccess = (list) => ({
 
 
 /*
-    Поиск товаров
-*/
-export const searchRequest = () => ({
-  type: SEARCH_REQUEST,
-});
-
-export const searchFailture = (error) => ({
-  type: SEARCH_FAILTURE,
-  payload: { error },
-});
-
-export const searchSuccess = (list) => ({
-  type: SEARCH_SUCCESS,
-  payload: { list },
-});
-
-/*
     Обработка поля поиска
 */
+
 export const changeSearchField = (search) => ({
   type: CHANGE_SEARCH_FIELD,
   payload: { search },
+});
+
+export const clearList = () => ({
+  type: CLEAR_LIST,
 });
