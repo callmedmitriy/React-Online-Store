@@ -13,7 +13,6 @@ const initialState = {
   error: null,
   search: '',
   more: true,
-  /* Должна ли здесь быть категория?!?!?! */
 };
 
 export default function catalogListReducer(state = initialState, action) {

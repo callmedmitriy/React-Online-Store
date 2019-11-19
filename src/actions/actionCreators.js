@@ -14,6 +14,11 @@ import {
   ITEM_SUCCESS,
   CHANGE_SEARCH_FIELD,
   CLEAR_LIST,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  SEND_CART_REQUEST,
+  SEND_CART_SUCCESS,
+  SEND_CART_FAILTURE,
 } from './actionTypes';
 
 /*
@@ -111,3 +116,31 @@ export const changeSearchField = (search) => ({
 export const clearList = () => ({
   type: CLEAR_LIST,
 });
+
+/*
+    Работа с корзиной
+*/
+
+export const addToCart = (product) => ({
+  type: ADD_TO_CART,
+  payload: { product }
+})
+
+export const removeFromCart = (id) => ({
+  type: REMOVE_FROM_CART,
+  payload: { id }
+})
+
+export const sendCartRequest = (cart) => ({
+  type: SEND_CART_REQUEST,
+  payload: { cart },
+})
+
+export const sendCartFailture = (error) => ({
+  type: SEND_CART_FAILTURE,
+  payload: { error }
+})
+
+export const sendCartSuccess = () => ({
+  type: SEND_CART_SUCCESS,
+})

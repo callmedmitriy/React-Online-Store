@@ -7,6 +7,7 @@ import catalogListReducer from '../reducers/catalogList.js';
 import categoriesListReducer from '../reducers/categoriesList.js';
 import hitsListReducer from '../reducers/hitsList.js';
 import itemReducer from '../reducers/Item.js';
+import cartReducer from '../reducers/Cart.js';
 
 import {
   searchHitsEpic,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   categories: categoriesListReducer,
   hits: hitsListReducer,
   item: itemReducer,
+  cart: cartReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

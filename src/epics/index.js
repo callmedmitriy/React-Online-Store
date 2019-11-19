@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
 import {
-  map, tap, retry, filter, debounceTime, switchMap, catchError,
+  map, tap, retry, debounceTime, switchMap, catchError,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
 import {
