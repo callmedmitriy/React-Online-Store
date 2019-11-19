@@ -16,12 +16,8 @@ export default function ItemSmallCard(props) {
         />
         <div className="card-body">
           <p className="card-text">{title}</p>
-          <p className="card-text">
-            {price}
-            {' '}
-руб.
-          </p>
-          <NavLink to={`products/${id}`} className="btn btn-outline-primary">Заказать</NavLink>
+          <p className="card-text">{price} руб.</p>
+          <NavLink to={`catalog/${id}`} className="btn btn-outline-primary">Заказать</NavLink>
         </div>
       </div>
     </div>

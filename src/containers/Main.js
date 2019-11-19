@@ -5,6 +5,7 @@ import MainPage from '../components/MainPage';
 import Catalog from '../components/Catalog';
 import About from '../components/About';
 import Contacts from '../components/Contacts';
+import ItemCard from '../components/ItemCard';
 import Page404 from '../components/Page404';
 
 import Banner from '../img/banner.jpg';
@@ -19,9 +20,10 @@ export default function Main() {
             <h2 className="banner-header">К весне готовы!</h2>
           </div>
           <Switch>
-            <Route path="/catalog" component={Catalog} />
             <Route path="/about" component={About} />
             <Route path="/contacts" component={Contacts} />
+            <Route path="/catalog/:id" component={ItemCard}/>
+            <Route path="/catalog" exact component={Catalog} />
             <Route path="/" exact component={MainPage} />
             <Route component={Page404} />
           </Switch>

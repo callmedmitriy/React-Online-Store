@@ -6,22 +6,26 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import catalogListReducer from '../reducers/catalogList.js';
 import categoriesListReducer from '../reducers/categoriesList.js';
 import hitsListReducer from '../reducers/hitsList.js';
+import itemReducer from '../reducers/Item.js';
 
 import {
   searchHitsEpic,
   searchCategoriesEpic,
   searchItemsEpic,
+  searchItemEpic,
 } from '../epics';
 
 const reducer = combineReducers({
   catalog: catalogListReducer,
   categories: categoriesListReducer,
   hits: hitsListReducer,
+  item: itemReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const epic = combineEpics(
+  searchItemEpic,
   searchHitsEpic,
   searchCategoriesEpic,
   searchItemsEpic,

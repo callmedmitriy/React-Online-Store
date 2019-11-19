@@ -9,6 +9,9 @@ import {
   ITEMS_REQUEST,
   ITEMS_FAILTURE,
   ITEMS_SUCCESS,
+  ITEM_REQUEST,
+  ITEM_FAILTURE,
+  ITEM_SUCCESS,
   CHANGE_SEARCH_FIELD,
   CLEAR_LIST,
 } from './actionTypes';
@@ -73,6 +76,26 @@ export const itemsFailture = (error) => ({
 export const itemsSuccess = (list) => ({
   type: ITEMS_SUCCESS,
   payload: { list },
+});
+
+/*
+    Получение полного описания товара
+*/
+export const itemRequest = (id) => ({
+  type: ITEM_REQUEST,
+  payload: {
+    id
+  },
+});
+
+export const itemFailture = (error) => ({
+  type: ITEM_FAILTURE,
+  payload: { error },
+});
+
+export const itemSuccess = (item) => ({
+  type: ITEM_SUCCESS,
+  payload: { item },
 });
 
 

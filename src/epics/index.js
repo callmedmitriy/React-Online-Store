@@ -8,6 +8,7 @@ import {
   HITS_LIST_REQUEST,
   CATEGORIES_REQUEST,
   ITEMS_REQUEST,
+  ITEM_REQUEST
 } from '../actions/actionTypes';
 import {
   hitsListSuccess,
@@ -16,7 +17,20 @@ import {
   categoriesFailture,
   itemsSuccess,
   itemsFailture,
+  itemSuccess,
+  itemFailture,
 } from '../actions/actionCreators';
+
+export const searchItemEpic = (action$) => action$.pipe(
+  ofType(ITEM_REQUEST),
+  tap((o) => console.log('item search epic', o)),
+  map(o => o.payload.id),
+  switchMap((o) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/items/${o}`).pipe(
+    retry(3),
+    map((o) => itemSuccess(o)),
+    catchError((e) => of(itemFailture(e))),
+  )),
+);
 
 export const searchHitsEpic = (action$) => action$.pipe(
   ofType(HITS_LIST_REQUEST),

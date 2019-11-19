@@ -11,6 +11,10 @@ export const ITEMS_REQUEST = 'ITEMS_REQUEST';
 export const ITEMS_FAILTURE = 'ITEMS_FAILTURE';
 export const ITEMS_SUCCESS = 'ITEMS_SUCCESS';
 
+export const ITEM_REQUEST = 'ITEM_REQUEST';
+export const ITEM_FAILTURE = 'ITEM_FAILTURE';
+export const ITEM_SUCCESS = 'ITEM_SUCCESS';
+
 export const CHANGE_SEARCH_FIELD = 'CHANGE_SEARCH_FIELD';
 
 export const CLEAR_LIST = 'CLEAR_LIST';
