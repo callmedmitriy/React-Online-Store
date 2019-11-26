@@ -6,6 +6,7 @@ import Catalog from '../components/Catalog';
 import About from '../components/About';
 import Contacts from '../components/Contacts';
 import ItemCard from '../components/ItemCard';
+import Cart from '../components/Cart';
 import Page404 from '../components/Page404';
 
 import Banner from '../img/banner.jpg';
@@ -22,6 +23,7 @@ export default function Main() {
           <Switch>
             <Route path="/about" component={About} />
             <Route path="/contacts" component={Contacts} />
+            <Route path="/cart" component={Cart} />
             <Route path="/catalog/:id" component={ItemCard}/>
             <Route path="/catalog" exact component={Catalog} />
             <Route path="/" exact component={MainPage} />
