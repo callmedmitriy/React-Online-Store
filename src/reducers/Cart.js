@@ -1,6 +1,7 @@
 import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
+  HANDLE_CHANGE,
   SEND_CART_REQUEST,
   SEND_CART_SUCCESS,
   SEND_CART_FAILTURE,
@@ -60,10 +61,18 @@ export default function cartReducer(state = initialState, action) {
       };
     case SEND_CART_SUCCESS:
       return {
+        ...state,
         cart: [],
         loading: false,
         error: null,
       };
+    case HANDLE_CHANGE: {
+      const { name, value } = action.payload
+      return {
+        ...state,
+        [name]: value,
+      }
+    }
     case SEND_CART_FAILTURE:
       const { error } = action.payload;
       return {

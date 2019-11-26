@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function CartList() {
+  
   return (
     <section class="cart">
       <h2 class="text-center">Корзина</h2>

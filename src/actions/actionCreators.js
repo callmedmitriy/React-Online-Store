@@ -15,6 +15,7 @@ import {
   CHANGE_SEARCH_FIELD,
   CLEAR_LIST,
   ADD_TO_CART,
+  HANDLE_CHANGE,
   REMOVE_FROM_CART,
   SEND_CART_REQUEST,
   SEND_CART_SUCCESS,
@@ -143,4 +144,9 @@ export const sendCartFailture = (error) => ({
 
 export const sendCartSuccess = () => ({
   type: SEND_CART_SUCCESS,
+})
+
+export const handleChangeCart = (name,value) => ({
+  type: HANDLE_CHANGE,
+  payload: { name, value }
 })
