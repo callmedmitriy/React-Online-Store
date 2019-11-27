@@ -24,7 +24,7 @@ export default function Main() {
             <Route path="/about" component={About} />
             <Route path="/contacts" component={Contacts} />
             <Route path="/cart" component={Cart} />
-            <Route path="/catalog/:id" component={ItemCard}/>
+            <Route path="/catalog/:id" component={ItemCard} />
             <Route path="/catalog" exact component={Catalog} />
             <Route path="/" exact component={MainPage} />
             <Route component={Page404} />

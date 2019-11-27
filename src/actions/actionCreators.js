@@ -90,7 +90,7 @@ export const itemsSuccess = (list) => ({
 export const itemRequest = (id) => ({
   type: ITEM_REQUEST,
   payload: {
-    id
+    id,
   },
 });
 
@@ -124,29 +124,29 @@ export const clearList = () => ({
 
 export const addToCart = (product) => ({
   type: ADD_TO_CART,
-  payload: { product }
-})
+  payload: { product },
+});
 
-export const removeFromCart = (id) => ({
+export const removeFromCart = (name, size) => ({
   type: REMOVE_FROM_CART,
-  payload: { id }
-})
+  payload: { name, size },
+});
 
 export const sendCartRequest = (cart) => ({
   type: SEND_CART_REQUEST,
   payload: { cart },
-})
+});
 
 export const sendCartFailture = (error) => ({
   type: SEND_CART_FAILTURE,
-  payload: { error }
-})
+  payload: { error },
+});
 
 export const sendCartSuccess = () => ({
   type: SEND_CART_SUCCESS,
-})
+});
 
-export const handleChangeCart = (name,value) => ({
+export const handleChangeCart = (name, value) => ({
   type: HANDLE_CHANGE,
-  payload: { name, value }
-})
+  payload: { name, value },
+});

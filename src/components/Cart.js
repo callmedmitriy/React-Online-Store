@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import CartList from './CartList'
-import CartForm from './CartForm'
+import CartList from './CartList';
+import CartForm from './CartForm';
 
 export default function Cart() {
   return (
@@ -9,5 +9,5 @@ export default function Cart() {
       <CartList />
       <CartForm />
     </>
-  ) 
+  );
 }

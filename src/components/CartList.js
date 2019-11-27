@@ -1,11 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+
+import { removeFromCart } from '../actions/actionCreators';
+
 
 export default function CartList() {
-  
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  let total = 0;
+  cart.forEach((o) => {
+    total += o.count * o.price;
+  });
+
   return (
-    <section class="cart">
-      <h2 class="text-center">Корзина</h2>
-      <table class="table table-bordered">
+    <section className="cart">
+      <h2 className="text-center">Корзина</h2>
+      <table className="table table-bordered">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -18,21 +29,23 @@ export default function CartList() {
           </tr>
         </thead>
         <tbody>
+          {cart && cart.map((position, index) => (
+            <tr key={position.name + position.size}>
+              <th>{++index}</th>
+              <td><NavLink to={`/catalog/${position.id}`}>{position.name}</NavLink></td>
+              <td>{position.size}</td>
+              <td>{position.count}</td>
+              <td>{position.price} руб.</td>
+              <td>{position.count * position.price} руб.</td>
+              <td><button className="btn btn-outline-danger btn-sm" onClick={() => dispatch(removeFromCart(position.name, position.size))}>Удалить</button></td>
+            </tr>
+          ))}
           <tr>
-            <th scope="row">1</th>
-            <td><a href="/products/1.html">Босоножки 'MYER'</a></td>
-            <td>18 US</td>
-            <td>1</td>
-            <td>34 000 руб.</td>
-            <td>34 000 руб.</td>
-            <td><button class="btn btn-outline-danger btn-sm">Удалить</button></td>
-          </tr>
-          <tr>
-            <td colspan="5" class="text-right">Общая стоимость</td>
-            <td>34 000 руб.</td>
+            <td colSpan="5" className="text-right">Общая стоимость</td>
+            <td>{total} руб.</td>
           </tr>
         </tbody>
       </table>
     </section>
-  )
+  );
 }

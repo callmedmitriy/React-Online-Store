@@ -14,6 +14,7 @@ import {
   searchCategoriesEpic,
   searchItemsEpic,
   searchItemEpic,
+  sendOrderEpic,
 } from '../epics';
 
 const reducer = combineReducers({
@@ -21,7 +22,7 @@ const reducer = combineReducers({
   categories: categoriesListReducer,
   hits: hitsListReducer,
   item: itemReducer,
-  cart: cartReducer
+  cart: cartReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -31,6 +32,7 @@ const epic = combineEpics(
   searchHitsEpic,
   searchCategoriesEpic,
   searchItemsEpic,
+  sendOrderEpic,
 );
 
 const epicMiddleware = createEpicMiddleware();

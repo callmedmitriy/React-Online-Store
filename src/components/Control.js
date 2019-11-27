@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import { changeSearchField } from '../actions/actionCreators';
 
-export default function Control(props) {
+export default function Control() {
+  const history = useHistory();
   const [showForm, setShowForm] = useState(false);
-  const [redirect, setRedirect] = useState(false);
-  const currentUrl = props.location.pathname;
   const { search } = useSelector((state) => state.catalog);
+  const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const handleSearch = () => {
     if (showForm) {
-      setRedirect(true);
+      history.push('/catalog');
     }
     setShowForm(!showForm);
   };
@@ -22,26 +22,15 @@ export default function Control(props) {
     dispatch(changeSearchField(target.value));
   };
 
-  /*
-    TODO:
-    handler for cart
-    data for cart
-  */
-
-  if (currentUrl !== '/catalog' && redirect) {
-    return <Redirect to="/catalog" />;
-  } if (currentUrl === '/catalog' && redirect) {
-    setRedirect(false);
-  }
-
   return (
     <div>
       <div className="header-controls-pics">
         <div data-id="search-expander" className="header-controls-pic header-controls-search" onClick={handleSearch} />
-        <div className="header-controls-pic header-controls-cart">
-          <div className="header-controls-cart-full">4</div>
+        <NavLink className="header-controls-pic header-controls-cart" to="/cart">
+          {cart.length > 0
+            && <div className="header-controls-cart-full">{cart.length}</div>}
           <div className="header-controls-cart-menu" />
-        </div>
+        </NavLink>
       </div>
       {showForm
         && (

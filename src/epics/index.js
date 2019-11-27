@@ -1,14 +1,15 @@
 import { ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
 import {
-  map, tap, retry, debounceTime, switchMap, catchError,
+  map, tap, retry, debounceTime, switchMap, catchError, exhaustMap,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
 import {
   HITS_LIST_REQUEST,
   CATEGORIES_REQUEST,
   ITEMS_REQUEST,
-  ITEM_REQUEST
+  ITEM_REQUEST,
+  SEND_CART_REQUEST,
 } from '../actions/actionTypes';
 import {
   hitsListSuccess,
@@ -19,12 +20,14 @@ import {
   itemsFailture,
   itemSuccess,
   itemFailture,
+  sendCartSuccess,
+  sendCartFailture,
 } from '../actions/actionCreators';
 
 export const searchItemEpic = (action$) => action$.pipe(
   ofType(ITEM_REQUEST),
   tap((o) => console.log('item search epic', o)),
-  map(o => o.payload.id),
+  map((o) => o.payload.id),
   switchMap((o) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/items/${o}`).pipe(
     retry(3),
     map((o) => itemSuccess(o)),
@@ -65,5 +68,26 @@ export const searchItemsEpic = (action$) => action$.pipe(
     retry(3),
     map((o) => itemsSuccess(o)),
     catchError((e) => of(itemsFailture(e))),
+  )),
+);
+
+export const sendOrderEpic = (action$, state$) => action$.pipe(
+  ofType(SEND_CART_REQUEST),
+  tap((o) => console.log('send order epic', o)),
+  debounceTime(300),
+  exhaustMap((o) => ajax({
+    url: `${process.env.REACT_APP_REQUEST_URL}/api/order`,
+    method: 'POST',
+    body: JSON.stringify({
+      owner: {
+        phone: state$.value.cart.phone,
+        address: state$.value.cart.address,
+      },
+      items: state$.value.cart.cart,
+    }),
+  }).pipe(
+    retry(3),
+    map((o) => sendCartSuccess(o)),
+    catchError((e) => of(sendCartFailture(e))),
   )),
 );
