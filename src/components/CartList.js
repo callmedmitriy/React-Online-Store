@@ -8,10 +8,9 @@ import { removeFromCart } from '../actions/actionCreators';
 export default function CartList() {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  let total = 0;
-  cart.forEach((o) => {
-    total += o.count * o.price;
-  });
+  const total = cart.reduce(function(sum,current) {
+    return sum + (current.count * current. price)
+  }, 0)
 
   return (
     <section className="cart">

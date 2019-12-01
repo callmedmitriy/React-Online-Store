@@ -8,7 +8,7 @@ import Product from '../models/Product';
 
 export default function ItemCard({ match }) {
   const history = useHistory();
-  const id = Number(match.params.id);
+  const id = parseInt(match.params.id, 10);
   const { item, loading, error } = useSelector((state) => state.item);
   const dispatch = useDispatch();
 

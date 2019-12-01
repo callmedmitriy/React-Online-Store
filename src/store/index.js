@@ -6,8 +6,8 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import catalogListReducer from '../reducers/catalogList.js';
 import categoriesListReducer from '../reducers/categoriesList.js';
 import hitsListReducer from '../reducers/hitsList.js';
-import itemReducer from '../reducers/Item.js';
-import cartReducer from '../reducers/Cart.js';
+import itemReducer from '../reducers/item.js';
+import cartReducer from '../reducers/cart.js';
 
 import {
   searchHitsEpic,

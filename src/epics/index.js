@@ -26,56 +26,56 @@ import {
 
 export const searchItemEpic = (action$) => action$.pipe(
   ofType(ITEM_REQUEST),
-  tap((o) => console.log('item search epic', o)),
-  map((o) => o.payload.id),
-  switchMap((o) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/items/${o}`).pipe(
+  tap((obj) => console.log('item search epic', obj)),
+  map((obj) => obj.payload.id),
+  switchMap((obj) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/items/${obj}`).pipe(
     retry(3),
-    map((o) => itemSuccess(o)),
-    catchError((e) => of(itemFailture(e))),
+    map((obj) => itemSuccess(obj)),
+    catchError((error) => of(itemFailture(error))),
   )),
 );
 
 export const searchHitsEpic = (action$) => action$.pipe(
   ofType(HITS_LIST_REQUEST),
-  tap((o) => console.log('top-sales epic', o)),
-  switchMap((o) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/top-sales`).pipe(
+  tap((obj) => console.log('top-sales epic', obj)),
+  switchMap((obj) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/top-sales`).pipe(
     retry(3),
-    map((o) => hitsListSuccess(o)),
-    catchError((e) => of(hitsListFailture(e))),
+    map((obj) => hitsListSuccess(obj)),
+    catchError((error) => of(hitsListFailture(error))),
   )),
 );
 
 export const searchCategoriesEpic = (action$) => action$.pipe(
   ofType(CATEGORIES_REQUEST),
-  tap((o) => console.log('categories epic', o)),
-  switchMap((o) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/categories`).pipe(
+  tap((obj) => console.log('categories epic', obj)),
+  switchMap((obj) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/categories`).pipe(
     retry(3),
-    map((o) => categoriesSuccess(o)),
-    catchError((e) => of(categoriesFailture(e))),
+    map((obj) => categoriesSuccess(obj)),
+    catchError((error) => of(categoriesFailture(error))),
   )),
 );
 
 export const searchItemsEpic = (action$) => action$.pipe(
   ofType(ITEMS_REQUEST),
-  tap((o) => console.log('search items epic', o)),
+  tap((obj) => console.log('search items epic', obj)),
   debounceTime(300),
-  map((o) => new URLSearchParams({
-    offset: o.payload.offset,
-    categoryId: o.payload.categoryId,
-    q: o.payload.search,
+  map((obj) => new URLSearchParams({
+    offset: obj.payload.offset,
+    categoryId: obj.payload.categoryId,
+    q: obj.payload.search,
   })),
-  switchMap((o) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/items/?${o}`).pipe(
+  switchMap((obj) => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/items/?${obj}`).pipe(
     retry(3),
-    map((o) => itemsSuccess(o)),
-    catchError((e) => of(itemsFailture(e))),
+    map((obj) => itemsSuccess(obj)),
+    catchError((error) => of(itemsFailture(error))),
   )),
 );
 
 export const sendOrderEpic = (action$, state$) => action$.pipe(
   ofType(SEND_CART_REQUEST),
-  tap((o) => console.log('send order epic', o)),
+  tap((obj) => console.log('send order epic', obj)),
   debounceTime(300),
-  exhaustMap((o) => ajax({
+  exhaustMap((obj) => ajax({
     url: `${process.env.REACT_APP_REQUEST_URL}/api/order`,
     method: 'POST',
     body: JSON.stringify({
@@ -87,7 +87,7 @@ export const sendOrderEpic = (action$, state$) => action$.pipe(
     }),
   }).pipe(
     retry(3),
-    map((o) => sendCartSuccess(o)),
-    catchError((e) => of(sendCartFailture(e))),
+    map((obj) => sendCartSuccess(obj)),
+    catchError((error) => of(sendCartFailture(error))),
   )),
 );
